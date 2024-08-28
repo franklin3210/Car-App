@@ -1,9 +1,15 @@
-.container{
+/* Apply background color to the entire page */
+body {
     background-color: rgb(166, 168, 170);
     background-size: cover;
     height: 100%;
     width: 100%;
-    margin: 0px;
+    margin: 0; /* Ensure no default margin */
+    padding: 0; /* Ensure no default padding */
+}
+
+/* Existing container styles */
+.container {
     padding: 10px;
 }
 

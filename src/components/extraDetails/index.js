@@ -69,6 +69,11 @@ function ExtraDetails() {
               </div>
             </div>
           )}
+          {carDetails.url && (
+            <a href={carDetails.url} target="_blank" rel="noopener noreferrer" className="view-details-button">
+              View Details
+            </a>
+          )}
         </div>
       </div>
     </div>
