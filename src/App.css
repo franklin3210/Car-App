@@ -1,0 +1,25 @@
+.container{
+    background-color: rgb(166, 168, 170);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+/* ... existing styles ... */
+
+.mobile-search {
+    display: none;
+    position: relative;
+  }
+  
+  .mobile-search .search-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-search {
+      display: block;
+    }
+  }

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css'; // Adjust the path if necessary
 
-function CarList() {
+function CarList({ searchTerm }) {
   const [cars, setCars] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('/cars.json') // Ensure this path is correct
@@ -20,14 +19,6 @@ function CarList() {
 
   return (
     <div className="car-list-container">
-      <h2 className="car-list-heading">Car List</h2> {/* Centered heading */}
-      <input 
-        type="text" 
-        placeholder="Search by title or class..." 
-        value={searchTerm} 
-        onChange={(e) => setSearchTerm(e.target.value)} 
-        className="search-bar"
-      />
       <div className="car-list">
         {filteredCars.length > 0 ? (
           filteredCars.map((car, index) => (

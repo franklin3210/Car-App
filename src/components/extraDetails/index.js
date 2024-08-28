@@ -1,27 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './index.css';
+import seat from "../../seatlogo.png"
+import './index.css'; // Adjust the path if necessary
 
 function ExtraDetails() {
   const location = useLocation();
-  const car = location.state?.car; // Use optional chaining to avoid errors
+  const { car } = location.state || {};
+  const [carDetails, setCarDetails] = useState(car);
 
-  console.log(location.state); // Check the state
+  useEffect(() => {
+    if (!carDetails) {
+      fetch('/path/to/cars.json')
+        .then(response => response.json())
+        .then(data => {
+          const foundCar = data.cars.find(c => c.id === car.id);
+          setCarDetails(foundCar);
+        });
+    }
+  }, [carDetails, car]);
 
-  if (!car) {
-    return <p>No car details available.</p>; // Handle the case where car is not available
+  if (!carDetails) {
+    return <div>No car details found.</div>;
   }
 
   return (
-    <div className="extra-details">
-      <h1>{car.title}</h1>
-      <img src={car.image} alt={car.title} className="extra-image" />
-      <p><strong>Start Production:</strong> {car.start_production}</p>
-      <p><strong>Class:</strong> {car.class}</p>
-      <p><strong>Seating Capacity:</strong> {car.seating_capacity}</p>
-      <p><strong>Ratings:</strong> {car.ratings}</p>
-      <p><strong>Safety Features:</strong> {car.safety_features.join(', ')}</p>
-      <p><strong>More Info:</strong> <a href={car.url} target="_blank" rel="noopener noreferrer">View Details</a></p>
+    <div className="car-details-container">
+      <h1>{carDetails.title}</h1> {/* Moved the title to the top */}
+      <div className='car-details'>
+        <div className="car-details-left">
+          {carDetails.image && (
+            <img src={carDetails.image} alt={carDetails.title} className="car-details-image" />
+          )}
+        </div>
+        <div className="car-details-right">
+          {carDetails.class && (
+            <p><span>Class: </span> {carDetails.class}</p>
+          )}
+          {carDetails.start_production && (
+            <p><span>Start Production: </span>{carDetails.start_production}</p>
+          )}
+          {carDetails.ratings && (
+            <div className="ratings-container">
+              <p><span>Ratings: </span>{carDetails.ratings}</p>
+              <div className="ratings-bar">
+                <div className="ratings-fill" style={{ width: `${carDetails.ratings * 20}%` }}></div>
+              </div>
+            </div>
+          )}
+          {carDetails.safety_features && carDetails.safety_features.length > 0 && (
+            <div className="safety-features-container">
+              <h3>Safety Features</h3>
+              <ul className="safety-features-list">
+                {carDetails.safety_features.map((feature, index) => (
+                  <li key={index} className="safety-feature-item">
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {carDetails.seating_capacity && (
+            <div className="seating-capacity-container">
+              <h3>Seating Capacity</h3>
+              <div className="seats">
+                {Array.from({ length: carDetails.seating_capacity }).map((_, index) => (
+                  <img key={index} src={seat} alt="Seat" className="seat-icon" />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
