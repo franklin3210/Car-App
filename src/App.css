@@ -3,23 +3,7 @@
     background-size: cover;
     height: 100%;
     width: 100%;
+    margin: 0px;
+    padding: 10px;
 }
 
-/* ... existing styles ... */
-
-.mobile-search {
-    display: none;
-    position: relative;
-  }
-  
-  .mobile-search .search-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 8px;
-  }
-  
-  @media (max-width: 768px) {
-    .mobile-search {
-      display: block;
-    }
-  }

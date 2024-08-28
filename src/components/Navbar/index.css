@@ -113,3 +113,16 @@
         display: block; /* Show search bar on larger screens */
     }
 }
+
+
+.mobile-search {
+    display: none;
+    position: relative;
+  }
+  
+  .mobile-search .search-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+  }
+  
