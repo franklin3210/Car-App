@@ -80,8 +80,7 @@
     width: 80%;
     max-width: 400px;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #000; /* Add solid black border */
+    background-color: transparent #fff;
     border-radius: 5px;
     position: relative;
 }
@@ -99,8 +98,7 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    background: #000; /* Set background to black */
-    color: #fff; /* Set text color to white */
+    color: black; /* Set text color to white */
     border: none;
     border-radius: 7px;
     padding: 10px;
