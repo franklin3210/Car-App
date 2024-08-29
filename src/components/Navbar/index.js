@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa'; // Import search icon from react-icons
+import { FaSearch, FaTimes } from 'react-icons/fa'; // Import search and close icons
 
 import carlogo from "../../carlogo.png";
 import './index.css'; // Ensure this path is correct
@@ -8,13 +8,33 @@ import './index.css'; // Ensure this path is correct
 function Navbar({ setSearchTerm }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchTerm, setSearchTermState] = useState('');
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+    setSearchTermState(e.target.value);
   };
 
   const handleLogoClick = () => {
     navigate('/');
+  };
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      if (searchTerm.trim() === '') {
+        setSearchTerm(''); // Fetch all details if no search term is provided
+      } else {
+        setSearchTerm(searchTerm);
+      }
+      setIsSearchOpen(false); // Close the search bar
+      // Optionally, you can navigate to a search results page
+      // navigate(`/search?query=${searchTerm}`);
+    }
   };
 
   // Check if the current path matches /car/:id
@@ -28,15 +48,32 @@ function Navbar({ setSearchTerm }) {
           <h1 className="car-list-heading">motogarage</h1>
         </div>
         {!isCarDetailPage && (
-          <div className="search-bar-container">
-            <FaSearch className="search-icon" />
-            <input
-              type="text"
-              className="search-bar"
-              onChange={handleSearchChange}
-              placeholder="Search for cars..."
-            />
-          </div>
+          <>
+            <div className="search-bar-container">
+              <FaSearch className="search-icon" onClick={toggleSearch} />
+              <input
+                type="text"
+                className="search-bar"
+                onChange={handleSearchChange}
+                onKeyDown={handleSearchKeyDown}
+                placeholder="Search for cars..."
+              />
+            </div>
+            {isSearchOpen && (
+              <div className="search-overlay">
+                <div className="mobile-search">
+                  <input
+                    type="text"
+                    className="search-input"
+                    onChange={handleSearchChange}
+                    onKeyDown={handleSearchKeyDown}
+                    placeholder="Search for cars..."
+                  />
+                  <FaTimes className="close-search" onClick={toggleSearch} />
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
