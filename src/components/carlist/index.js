@@ -8,7 +8,7 @@ function CarList({ searchTerm }) {
   const [carsPerPage, setCarsPerPage] = useState(9);
 
   useEffect(() => {
-    fetch('/cars.json') // Ensure this path is correct
+    fetch('https://carapp-server-yl26.onrender.com/api/cars') // Ensure this path is correct
       .then(response => response.json())
       .then(data => setCars(data))
       .catch(error => console.error('Error fetching car data:', error));
