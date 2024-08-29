@@ -43,17 +43,27 @@
     justify-content: flex-end;
     align-items: center;
     padding: 10px;
+    background-color: #fff;
     flex-grow: 1; /* Allow it to grow */
     max-width: 400px;
     width: 100%; /* Ensure it takes full width on smaller screens */
+    border-radius: 16px;
 }
+
+.search-icon{
+    margin-right: 10px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5; /* Optional: To give a visual indication that the element is disabled */
+    cursor: not-allowed; /* Optional: To change the cursor to indicate that the element is disabled */
+  }
 
 .search-bar {
     padding: 10px;
     width: 100%; /* Make input responsive */
     max-width: 400px; /* Set a max width */
-    border: 1px solid #000; /* Add solid black border */
-    border-radius: 5px;
     flex-grow: 1; /* Allow it to grow */
 }
 
@@ -104,7 +114,7 @@
     padding: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .search-bar {
         display: none; /* Hide search bar on mobile */
     }
@@ -113,6 +123,11 @@
         cursor: pointer;
     }
 
+    .disabled {
+        pointer-events: auto; /* or pointer-events: all; */
+        cursor: pointer; /* or cursor: default; */
+      }
+
     .car-logo {
         width: 40px; /* Reduce size for mobile */
     }
@@ -120,10 +135,10 @@
     .car-list-heading {
         font-size: 1.5em; /* Reduce size for mobile */
     }
-}
-
-@media (min-width: 769px) {
-    .search-bar {
-        display: block; /* Show search bar on larger screens */
+    .search-bar-container{
+        background-color:transparent;
+        justify-content: space-around;
+        
     }
 }
+

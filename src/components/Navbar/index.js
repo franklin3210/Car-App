@@ -50,7 +50,7 @@ function Navbar({ setSearchTerm }) {
         {!isCarDetailPage && (
           <>
             <div className="search-bar-container">
-              <FaSearch className="search-icon" onClick={toggleSearch} />
+              <FaSearch className="search-icon disabled" onClick={toggleSearch} />
               <input
                 type="text"
                 className="search-bar"
