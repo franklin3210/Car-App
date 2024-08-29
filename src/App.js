@@ -14,7 +14,7 @@ function App() {
         <Navbar setSearchTerm={setSearchTerm} />
         <Routes>
           <Route path="/" element={<CarList searchTerm={searchTerm} />} />
-          <Route path="/car/:id" element={<ExtraDetails searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
+          <Route path="/car/:id" element={<ExtraDetails searchTerm={searchTerm} />} />
         </Routes>
       </div>
     </Router>
